@@ -1,0 +1,32 @@
+{
+  "flights": [
+    {
+      "origin": "Vladivostok",
+      "destination": "TelAviv",
+      "carrier": "Airoflot",
+      "duration": 9,
+      "price": 65021
+    },
+    {
+      "origin": "Vladivostok",
+      "destination": "TelAviv",
+      "carrier": "Airoflot",
+      "duration": 8,
+      "price": 78352
+    },
+    {
+      "origin": "Vladivostok",
+      "destination": "TelAviv",
+      "carrier": "Boing",
+      "duration": 10,
+      "price": 98521
+    },
+    {
+      "origin": "Vladivostok",
+      "destination": "TelAviv",
+      "carrier": "Airobus",
+      "duration": 10,
+      "price": 98300
+    }
+  ]
+}
