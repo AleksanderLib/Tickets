@@ -17,7 +17,7 @@ public class MinFly {
         HashMap<String, Integer> minDurations = getMinDurations();
     }
 
-    public HashMap<String, Integer> getMinDurations() {
+    private HashMap<String, Integer> getMinDurations() {
         minDurations = new HashMap<>();
         FlightJson flightJson = new FlightJson();
         for (FlightJson.Flight flight : flightJson.tickets.getFlights()) {
