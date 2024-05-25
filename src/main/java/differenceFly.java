@@ -1,34 +1,38 @@
-import org.json.simple.JSONObject;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 // Класс для разницы между средней ценой и медианой
 public class differenceFly extends FlightJson {
-    List<Integer> prices = new ArrayList<>();
-    private int price;
     private double averagePrice;
-    private double medianPrice;
+    private  int medianDuration;
+    private double difference;
     public differenceFly() {
-        calculateDifference();
+        averagePrice = calculateAveragePrice(tickets.getFlights());
+        medianDuration = calculateMedianPrice(tickets.getFlights());
+        difference = averagePrice - medianDuration;
     }
-    private void calculateDifference()
-    {
-        for (int i = 0; i < flights.size(); i++) {
-            JSONObject flight = (JSONObject) flights.get(i);
-            price = ((Long) flight.get("price")).intValue();
-            prices.add(price);
-        }
 
-        averagePrice = prices.stream().mapToInt(Integer::intValue).average().orElse(0);
-        Collections.sort(prices);
-        if (prices.size() % 2 == 0) {
-            medianPrice = (prices.get(prices.size() / 2 - 1) + prices.get(prices.size() / 2)) / 2.0;
+
+    private static double calculateAveragePrice(List<Flight> flights) {
+        double totalPrice = 0;
+        for (Flight flight : flights) {
+            totalPrice += flight.getPrice();
+        }
+        flights.size();
+        return totalPrice / flights.size();
+    }
+
+    private static int calculateMedianPrice(List<Flight> flights) {
+        flights.sort(Comparator.comparingInt(Flight::getPrice));
+        if (flights.size() % 2 == 0) {
+            int index = flights.size() / 2;
+            return (flights.get(index - 1).getPrice() + flights.get(index).getPrice()) / 2;
         } else {
-            medianPrice = prices.get(prices.size() / 2);
+            return flights.get((flights.size() - 1) / 2).getPrice();
         }
     }
 
-    public void outDifference() {
-        System.out.println("Разница между средней ценой и медианой: " + (averagePrice - medianPrice));
+    @Override
+    public String toString() {
+        return String.valueOf(difference);
     }
 }

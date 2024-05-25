@@ -1,43 +1,33 @@
-import org.json.simple.JSONObject;
 import java.util.HashMap;
 //Класс для минимального время полета
-public class MinFly extends FlightJson {
-    private String origin;
-    private  String destination;
-    private String carrier;
-    private  int duration;
-    HashMap<String, Integer> minDurations = new HashMap<>();
+public class MinFly {
+    HashMap<String, Integer> minDurations;
+
+    @Override
+    public String toString() {
+
+        StringBuilder result = new StringBuilder();
+        for (String carrier : minDurations.keySet()) {
+            result.append(carrier).append(": ").append(minDurations.get(carrier)).append(" часов\n");
+        }
+        return result.toString();
+    }
 
     public MinFly() {
-        calculateMin();
-
+        HashMap<String, Integer> minDurations = getMinDurations();
     }
 
-    private void calculateMin() {
-        for (int i = 0; i < flights.size(); i++) {
-            JSONObject flight = (JSONObject) flights.get(i);
-            origin = (String) flight.get("origin");
-            destination = (String) flight.get("destination");
-            carrier = (String) flight.get("carrier");
-            duration = ((Long) flight.get("duration")).intValue();
-
-
-            if (origin.equals("Vladivostok") && destination.equals("TelAviv")) {
-                if (minDurations.containsKey(carrier)) {
-                    minDurations.put(carrier, Math.min(minDurations.get(carrier), duration));
-                } else {
-                    minDurations.put(carrier, duration);
-                }
+    public HashMap<String, Integer> getMinDurations() {
+        minDurations = new HashMap<>();
+        FlightJson flightJson = new FlightJson();
+        for (FlightJson.Flight flight : flightJson.tickets.getFlights()) {
+            if (!minDurations.containsKey(flight.getCarrier())) {
+                minDurations.put(flight.getCarrier(), flight.getDuration());
+            } else {
+                int currentMin = minDurations.get(flight.getCarrier());
+                minDurations.put(flight.getCarrier(), Math.min(currentMin, flight.getDuration()));
             }
         }
+        return minDurations;
     }
-
-    public void outMinFly() {
-        System.out.println("Минимальное время полета между городами Владивосток и Тель-Авив:");
-        for (String carrier : minDurations.keySet()) {
-            System.out.println(carrier + ": " + minDurations.get(carrier) + " часов");
-        }
-    }
-
-
 }

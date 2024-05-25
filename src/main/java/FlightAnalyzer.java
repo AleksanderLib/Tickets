@@ -2,8 +2,10 @@ public class FlightAnalyzer {
 
     public static void main(String[] args) {
         MinFly fj = new MinFly();
-        fj.outMinFly();
+        System.out.println("Минимальное время полета между городами Владивосток и Тель-Авив:");
+        System.out.println(fj.toString());
+        System.out.println("Разницу между средней ценой  и медианой");
         differenceFly df = new differenceFly();
-        df.outDifference();
+        System.out.println(df.toString());
     }
 }

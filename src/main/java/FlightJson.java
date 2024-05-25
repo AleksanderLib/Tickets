@@ -1,36 +1,67 @@
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.*;
+import java.util.List;
 
 public class FlightJson {
-    JSONParser parser = new JSONParser();
-    JSONArray flights = new JSONArray();
-    JSONObject json = new JSONObject();
-    Object obj = new Object();
+    ObjectMapper mapper = new ObjectMapper();
+    Tickets tickets;
 
     public FlightJson() {
+        // Чтение JSON-файла
         try {
-            obj = parser.parse(new FileReader("tickets.json"));
-            json = (JSONObject) obj;
-            flights = (JSONArray) json.get("flights");
-        }
-        catch (ClassCastException e) {
+            File file = new File("tickets.json");
+            long fileSize = file.length();
+            long blockSize = 1024;
+            long numBlocks = (fileSize + blockSize - 1) / blockSize;
+
+            BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+            for (long i = 0; i < numBlocks; i++) {
+                byte[] buffer = new byte[(int) Math.min(blockSize, fileSize - i * blockSize)];
+                bis.read(buffer);
+                tickets = mapper.readValue(new String(buffer), Tickets.class);
+            }
+            bis.close();
+        } catch ( FileNotFoundException e) {
             e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        }
+         catch (StreamReadException e) {
+            e.printStackTrace();
+        } catch (DatabindException e) {
+            e.printStackTrace();
         } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
     }
 
+    public static class Flight {
+        public String origin;
+        public String destination;
+        public String carrier;
+        public int duration;
+        public int price;
+
+        public String getCarrier() {
+            return carrier;
+        }
+
+        public int getDuration() {
+            return duration;
+        }
+
+        public int getPrice() {
+            return price;
+        }
+    }
+    public static class Tickets {
+        public List<Flight> flights;
+
+        public List<Flight> getFlights() {
+            return flights;
+        }
+    }
 
 
 }
