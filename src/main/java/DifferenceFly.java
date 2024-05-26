@@ -1,17 +1,20 @@
 import java.util.Comparator;
 import java.util.List;
-// Класс для разницы между средней ценой и медианой
-public class differenceFly {
-    private double averagePrice;
-    private  int medianDuration;
-    private double difference;
-    public differenceFly() {
+    // Класс для разницы между средней ценой и медианой
+    public class DifferenceFly {
+        private double averagePrice;
+        private  int medianDuration;
+        private double difference;
+        public DifferenceFly() {
+/*
         FlightJson flightJson = new FlightJson();
+        difference = averagePrice - medianDuration;
         averagePrice = calculateAveragePrice(flightJson.tickets.getFlights());
         medianDuration = calculateMedianPrice(flightJson.tickets.getFlights());
-        difference = averagePrice - medianDuration;
-    }
+*/
+        }
 
+/*
 
     private static double calculateAveragePrice(List<FlightJson.Flight> flights) {
         double totalPrice = 0;
@@ -31,9 +34,12 @@ public class differenceFly {
             return flights.get((flights.size() - 1) / 2).getPrice();
         }
     }
+*/
 
-    @Override
-    public String toString() {
-        return String.valueOf(difference);
+        @Override
+        public String toString() {
+            return String.valueOf(difference);
+        }
     }
-}
+
+
