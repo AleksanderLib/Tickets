@@ -19,6 +19,26 @@ public class TicketModel {
 
     }
 
+    public String getOrigin_name() {
+        return origin_name;
+    }
+
+    public String getDestination_name() {
+        return destination_name;
+    }
+
+    public String getDeparture_date() {
+        return departure_date;
+    }
+
+    public String getArrival_date() {
+        return arrival_date;
+    }
+
+    public int getStops() {
+        return stops;
+    }
+
     public String getOrigin() {
         return origin;
     }
