@@ -8,6 +8,7 @@ public class OutMinFly {
         for (String carrier : minFly.minFlightTimeByCarrier.keySet()) {
             result.append(carrier).append(": ").append(minFly.minFlightTimeByCarrier.get(carrier)).append(" часов\n");
         }
+        System.out.println("Минимальное время полета между городами Владивосток и Тель-Авив:");
         System.out.println(result);
     }
 

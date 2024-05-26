@@ -18,7 +18,7 @@ public class ParseTicketsJson {
         // Чтение JSON-файла
     }
 
-    public List<TicketModel> ReadJson(TicketsModel ticketsModel) {
+    public List<TicketModel> readJson(TicketsModel ticketsModel) {
         try {
             module.addDeserializer(Date.class, new CustomDateDeserializer());
             mapper.registerModule(module);
