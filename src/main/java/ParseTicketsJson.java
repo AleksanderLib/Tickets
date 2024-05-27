@@ -9,35 +9,37 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class ParseTicketsJson {
-    ObjectMapper mapper = new ObjectMapper();
-    SimpleModule module = new SimpleModule();
-    List<TicketModel> tickets = new ArrayList<>();
+    private ObjectMapper mapper = new ObjectMapper();
+    private SimpleModule module = new SimpleModule();
+    private List<TicketModel> tickets = new ArrayList<>();
+
     public ParseTicketsJson() {
-        // Чтение JSON-файла
+
     }
 
-    public List<TicketModel> readJson(TicketsModel ticketsModel) {
+    public List<TicketModel> readJson(TicketsModel ticketsModel,FilePathInput filePathInput) {
         try {
             module.addDeserializer(Date.class, new CustomDateDeserializer());
             mapper.registerModule(module);
-            String filePath = "tickets.json";
-            ticketsModel = mapper.readValue(new File(filePath), TicketsModel.class);
+            ticketsModel = mapper.readValue(filePathInput.getFile(), TicketsModel.class);
             tickets.addAll(ticketsModel.getTickets());
 
-        } catch ( FileNotFoundException e) {
+        } catch (NullPointerException e) {
             e.printStackTrace();
-        }
-         catch (StreamReadException e) {
+        } catch (StreamReadException e) {
             e.printStackTrace();
         } catch (DatabindException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return tickets;
     }
+
 }
 
 

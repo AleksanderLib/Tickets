@@ -1,4 +1,5 @@
 import Model.TicketModel;
+import Model.TicketsModel;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -6,13 +7,13 @@ import java.util.stream.Collectors;
 public class MinFly {
     Map<String, Integer> minFlightTimeByCarrier;
 
-    public MinFly(ParseTicketsJson parseTicketsJson, VvoToTlvTicketsList vvoToTlvTicketsList) {
-        minFlightTimeByCarrier = getMinFlightTimeByCarrier(parseTicketsJson, vvoToTlvTicketsList);
+    public MinFly(VvoToTlvTicketsList vvoToTlvTicketsList) {
+        minFlightTimeByCarrier = getMinFlightTimeByCarrier( vvoToTlvTicketsList);
     }
 
-    private Map<String, Integer> getMinFlightTimeByCarrier(ParseTicketsJson parseTicketsJson, VvoToTlvTicketsList vvoToTlvTicketsList) {
+    private Map<String, Integer> getMinFlightTimeByCarrier(VvoToTlvTicketsList vvoToTlvTicketsList) {
         minFlightTimeByCarrier = new HashMap<>();
-        minFlightTimeByCarrier = vvoToTlvTicketsList.getVvoToTlvTickets(parseTicketsJson).stream()
+        minFlightTimeByCarrier = vvoToTlvTicketsList.vvoToTlvTickets.stream()
                 .collect(Collectors.toMap(
                         TicketModel::getCarrier,
                         this::calculateFlightTimeInHours,

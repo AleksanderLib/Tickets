@@ -2,9 +2,10 @@
 public class FlightAnalyzer {
 
     public static void main(String[] args) {
-        MinFly minFly = new MinFly(new ParseTicketsJson(), new VvoToTlvTicketsList());
+        VvoToTlvTicketsList vvoToTlvTicketsList = new VvoToTlvTicketsList();
+        MinFly minFly = new MinFly(vvoToTlvTicketsList);
         OutMinFly.out(minFly);
-        DifferencePrice differencePrice = new DifferencePrice(new ParseTicketsJson(), new VvoToTlvTicketsList());
+        DifferencePrice differencePrice = new DifferencePrice(vvoToTlvTicketsList);
         OutDifferencePrice.out(differencePrice);
     }
 }
