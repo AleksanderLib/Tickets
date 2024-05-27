@@ -6,14 +6,14 @@ import java.util.List;
         private  double averagePrice;
         private  double medianPrice;
         public double difference;
-        public DifferencePrice(ParseTicketsJson parseTicketsJson, VvoToTlvTicketsList vvoToTlvTicketsList) {
-            calculateDifferencePrice(parseTicketsJson,vvoToTlvTicketsList);
+        public DifferencePrice(VvoToTlvTicketsList vvoToTlvTicketsList) {
+            calculateDifferencePrice(vvoToTlvTicketsList);
         }
 
 
-    public double calculateDifferencePrice(ParseTicketsJson parseTicketsJson,VvoToTlvTicketsList vvoToTlvTicketsList) {
+    public double calculateDifferencePrice(VvoToTlvTicketsList vvoToTlvTicketsList) {
 
-            List <TicketModel> vvoToTlvTickets = vvoToTlvTicketsList.getVvoToTlvTickets(parseTicketsJson);
+            List <TicketModel> vvoToTlvTickets = vvoToTlvTicketsList.vvoToTlvTickets;
             averagePrice = getAveragePrice(vvoToTlvTickets);
             medianPrice = getMedianPrice(vvoToTlvTickets);
             difference = Math.abs(averagePrice - medianPrice);

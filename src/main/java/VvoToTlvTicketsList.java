@@ -6,15 +6,17 @@ import java.util.stream.Collectors;
 
 public class VvoToTlvTicketsList {
 
-    private static List<TicketModel> vvoToTlvTickets;
+    List<TicketModel> vvoToTlvTickets;
+
+    public VvoToTlvTicketsList() {
+        vvoToTlvTickets = getVvoToTlvTickets(new ParseTicketsJson());
+    }
 
     public List<TicketModel> getVvoToTlvTickets(ParseTicketsJson parseTicketsJson) {
-        vvoToTlvTickets = parseTicketsJson.readJson(new TicketsModel())
+        vvoToTlvTickets = parseTicketsJson.readJson(new TicketsModel(),new FilePathInput())
                 .stream()
                 .filter(t -> t.getOrigin().equals("VVO") && t.getDestination().equals("TLV"))
                 .collect(Collectors.toList());
         return vvoToTlvTickets;
     }
-
-
 }
