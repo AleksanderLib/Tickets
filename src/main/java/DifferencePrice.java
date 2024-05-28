@@ -13,7 +13,7 @@ import java.util.List;
 
     public double calculateDifferencePrice(VvoToTlvTicketsList vvoToTlvTicketsList) {
 
-            List <TicketModel> vvoToTlvTickets = vvoToTlvTicketsList.vvoToTlvTickets;
+            List <TicketModel> vvoToTlvTickets = vvoToTlvTicketsList.sortTicketModel();
             averagePrice = getAveragePrice(vvoToTlvTickets);
             medianPrice = getMedianPrice(vvoToTlvTickets);
             difference = Math.abs(averagePrice - medianPrice);
@@ -30,6 +30,7 @@ import java.util.List;
         }
 
         private double getMedianPrice(List<TicketModel> vvoToTlvTickets) {
+
             double medianPrice = vvoToTlvTickets.size() % 2 == 0 ?
                     vvoToTlvTickets.get((vvoToTlvTickets.size() / 2) - 1).getPrice() :
                     vvoToTlvTickets.get(vvoToTlvTickets.size() / 2).getPrice();

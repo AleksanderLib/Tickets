@@ -21,10 +21,10 @@ public class MinFly {
                         LinkedHashMap::new
                 ));
         return minFlightTimeByCarrier;
-
     }
 
     private int calculateFlightTimeInHours(TicketModel ticket) {
-        return (int) ((ticket.getArrival_time().getTime() - ticket.getDeparture_time().getTime()) / (60 * 60 * 1000));
+        int rez = ((int)(ticket.getArrival_time().getTime() - ticket.getDeparture_time().getTime()) / (60*1000));
+        return rez;
     }
 }

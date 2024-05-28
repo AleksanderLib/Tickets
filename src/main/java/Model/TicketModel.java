@@ -2,7 +2,7 @@ package Model;
 
 import java.util.Date;
 
-public class TicketModel {
+public class TicketModel implements Comparable<TicketModel>{
     private String origin;
     private String origin_name;
     private String destination;
@@ -61,6 +61,11 @@ public class TicketModel {
 
     public int getPrice() {
         return price;
+    }
+
+    @Override
+    public int compareTo(TicketModel ticketModel) {
+        return Integer.compare(ticketModel.price, this.price);
     }
 }
 
