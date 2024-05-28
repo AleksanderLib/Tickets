@@ -1,5 +1,4 @@
 import Model.TicketModel;
-
 import java.util.List;
 
     public class DifferencePrice {
@@ -7,14 +6,13 @@ import java.util.List;
         private  double medianPrice;
         public double difference;
         public DifferencePrice(VvoToTlvTicketsList vvoToTlvTicketsList) {
-            calculateDifferencePrice(vvoToTlvTicketsList);
+            calculateDifferencePrice(vvoToTlvTicketsList.vvoToTlvTickets);
         }
 
 
-    public double calculateDifferencePrice(VvoToTlvTicketsList vvoToTlvTicketsList) {
-
-            List <TicketModel> vvoToTlvTickets = vvoToTlvTicketsList.sortTicketModel();
-            averagePrice = getAveragePrice(vvoToTlvTickets);
+    public double calculateDifferencePrice(List<TicketModel> vvoToTlvTicketsList) {
+        List<TicketModel> vvoToTlvTickets = vvoToTlvTicketsList.stream().sorted().toList();
+        averagePrice = getAveragePrice(vvoToTlvTickets);
             medianPrice = getMedianPrice(vvoToTlvTickets);
             difference = Math.abs(averagePrice - medianPrice);
             return  difference;
@@ -22,7 +20,7 @@ import java.util.List;
 
         private double getAveragePrice(List<TicketModel> vvoToTlvTickets) {
 
-            double averagePrice = vvoToTlvTickets.stream()
+            averagePrice = vvoToTlvTickets.stream()
                     .mapToDouble(TicketModel::getPrice)
                     .average()
                     .orElse(0);
@@ -30,10 +28,14 @@ import java.util.List;
         }
 
         private double getMedianPrice(List<TicketModel> vvoToTlvTickets) {
-
-            double medianPrice = vvoToTlvTickets.size() % 2 == 0 ?
-                    vvoToTlvTickets.get((vvoToTlvTickets.size() / 2) - 1).getPrice() :
-                    vvoToTlvTickets.get(vvoToTlvTickets.size() / 2).getPrice();
+            if( vvoToTlvTickets.size() % 2 == 1 )
+            {
+                return vvoToTlvTickets.get(vvoToTlvTickets.size() / 2).getPrice();
+            }
+            else
+            {
+                medianPrice = (vvoToTlvTickets.get(vvoToTlvTickets.size()/2).getPrice()+vvoToTlvTickets.get(vvoToTlvTickets.size()/2-1).getPrice())/2;
+            }
             return medianPrice;
         }
     }

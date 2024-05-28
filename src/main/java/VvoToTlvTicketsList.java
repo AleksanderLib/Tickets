@@ -19,12 +19,8 @@ public class VvoToTlvTicketsList {
                 .stream()
                 .filter(t -> t.getOrigin().equals("VVO") && t.getDestination().equals("TLV"))
                 .collect(Collectors.toList());
-        //vvoToTlvTickets.sort((Comparator<? super TicketModel>) vvoToTlvTickets);
         return vvoToTlvTickets;
     }
-    public List<TicketModel> sortTicketModel() {
-        Collections.sort(vvoToTlvTickets);
-        return vvoToTlvTickets;
-    }
+
 
 }

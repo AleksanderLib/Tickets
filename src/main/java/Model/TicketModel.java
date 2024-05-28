@@ -2,7 +2,7 @@ package Model;
 
 import java.util.Date;
 
-public class TicketModel implements Comparable<TicketModel>{
+public class TicketModel implements Comparable<TicketModel> {
     private String origin;
     private String origin_name;
     private String destination;
