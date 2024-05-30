@@ -8,9 +8,9 @@ public class TicketModel implements Comparable<TicketModel> {
     private String destination;
     private String destination_name;
     private String departure_date;
-    private Date departure_time;
+    private String departure_time;
     private String arrival_date;
-    private Date arrival_time;
+    private String arrival_time;
     private String carrier;
     private int stops;
     private int price;
@@ -47,11 +47,11 @@ public class TicketModel implements Comparable<TicketModel> {
         return destination;
     }
 
-    public Date getDeparture_time() {
+    public String getDeparture_time() {
         return departure_time;
     }
 
-    public Date getArrival_time() {
+    public String getArrival_time() {
         return arrival_time;
     }
 
