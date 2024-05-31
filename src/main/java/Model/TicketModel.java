@@ -1,16 +1,24 @@
 package Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class TicketModel implements Comparable<TicketModel> {
+
     private String origin;
     private String origin_name;
     private String destination;
     private String destination_name;
-    private String departure_date;
-    private String departure_time;
-    private String arrival_date;
-    private String arrival_time;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yy", locale = "ru_RU")
+    private LocalDate departure_date;
+    private Date departure_time;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd.MM.yy", locale = "ru_RU")
+    private LocalDate arrival_date;
+    private Date arrival_time;
     private String carrier;
     private int stops;
     private int price;
@@ -27,11 +35,12 @@ public class TicketModel implements Comparable<TicketModel> {
         return destination_name;
     }
 
-    public String getDeparture_date() {
+    public LocalDate getDeparture_date() {
         return departure_date;
     }
 
-    public String getArrival_date() {
+
+    public LocalDate getArrival_date() {
         return arrival_date;
     }
 
@@ -47,11 +56,11 @@ public class TicketModel implements Comparable<TicketModel> {
         return destination;
     }
 
-    public String getDeparture_time() {
+    public Date getDeparture_time() {
         return departure_time;
     }
 
-    public String getArrival_time() {
+    public Date getArrival_time() {
         return arrival_time;
     }
 
